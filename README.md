@@ -30,8 +30,8 @@ This Streamlit-based Face Recognition App utilizes DeepFace (Facenet512) for fac
 
 1️⃣ Clone this repository:
 
-git clone https://github.com/yourusername/face-recognition-app.git
-cd face-recognition-app
+git clone git@github.com:DataBird-Savvy/faceDetection.git
+
 
 2️⃣ Install dependencies:
 
