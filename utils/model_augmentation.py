@@ -16,7 +16,7 @@ datagen = ImageDataGenerator(
 )
 
 # Folder containing cropped face images
-folder_path = "data/processed_faces/train/lionel_messi"
+folder_path = "data/processed_faces/lionel_messi"
 
 # Get all subfolders (if you have subfolders inside the 'lionel_messi' folder)
 subfolders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, f))]
