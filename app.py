@@ -6,6 +6,8 @@ import tempfile
 import os
 from deepface import DeepFace
 from mtcnn import MTCNN
+from io import BytesIO
+import shutil
 
 # Initialize MTCNN for face detection
 detector = MTCNN()
@@ -26,12 +28,18 @@ label_encoder = joblib.load("artifacts/label_encoder.pkl")
 # Set DeepFace model
 deepface_model = "Facenet512"
 
-# Function to extract embeddings using DeepFace
 def get_embedding(face_crop):
     try:
-        temp_face_path = "temp_face.jpg"
-        cv2.imwrite(temp_face_path, face_crop)
+        # Convert face crop to in-memory image
+        _, buffer = cv2.imencode(".jpg", face_crop)
+        img_bytes = BytesIO(buffer)
 
+        # Save the image as a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+            temp_file.write(img_bytes.getvalue())
+            temp_face_path = temp_file.name
+
+        # Get embedding using DeepFace from the temporary file path
         embedding = DeepFace.represent(
             img_path=temp_face_path,
             model_name=deepface_model,
@@ -39,10 +47,15 @@ def get_embedding(face_crop):
             detector_backend="mtcnn"
         )[0]['embedding']
 
+        # Clean up the temporary file
+        os.remove(temp_face_path)
+
         return np.array(embedding).reshape(1, -1)
+
     except Exception as e:
         print(f"Error extracting embedding: {e}")
         return None
+
 
 # Function to recognize faces in images
 def recognize_and_draw_faces(image):
@@ -71,8 +84,9 @@ def recognize_and_draw_faces(image):
 def process_video(video_path):
     cap = cv2.VideoCapture(video_path)
     frame_skip = 5  
-    output_frames = []
     frame_count = 0
+
+    frame_placeholder = st.empty()
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -81,12 +95,14 @@ def process_video(video_path):
 
         if frame_count % frame_skip == 0:  
             frame = recognize_and_draw_faces(frame)
+        
+        # Display frame in Streamlit
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame_placeholder.image(frame_rgb, channels="RGB", use_container_width=True)
 
-        output_frames.append(frame)
         frame_count += 1
 
     cap.release()
-    return output_frames
 
 # Function to save processed video
 def save_video(frames, output_path="output_video.mp4"):
@@ -95,15 +111,21 @@ def save_video(frames, output_path="output_video.mp4"):
         return None
 
     height, width, _ = frames[0].shape
-    fourcc = cv2.VideoWriter_fourcc(*"avc1")  # Use "XVID" for AVI
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")  # "avc1" may not work on all devices
     out = cv2.VideoWriter(output_path, fourcc, 20.0, (width, height))
 
     for frame in frames:
-        frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        out.write(frame_bgr)
+        out.write(frame)  # No need to convert back to BGR
 
     out.release()
     return output_path
+
+# Function to safely remove files
+def safe_remove(file_path):
+    try:
+        os.remove(file_path)
+    except PermissionError:
+        shutil.move(file_path, tempfile.gettempdir())
 
 # Streamlit UI
 st.title("🚀 Face Recognition App (Image & Video)")
@@ -125,7 +147,7 @@ if uploaded_file:
         result_image = recognize_and_draw_faces(image)
 
         st.image(result_image, caption="Face Recognition Result", use_container_width=True)
-        os.remove(temp_path)
+        safe_remove(temp_path)
 
     # Process video
     elif file_extension == "mp4":
@@ -143,5 +165,5 @@ if uploaded_file:
 
         if output_video_path:
             st.video(output_video_path)  # Display processed video
-            os.remove(temp_path)
-            os.remove(output_video_path)
+            safe_remove(temp_path)
+            safe_remove(output_video_path)

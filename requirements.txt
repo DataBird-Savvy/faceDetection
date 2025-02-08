@@ -1,8 +1,9 @@
 mtcnn==1.0.0
-opencv-python==4.11.0.86
 deepface
 joblib==1.4.2
 streamlit==1.41.1
 mtcnn==1.0.0
 tf_keras
 scikit-learn
+opencv-contrib-python
+opencv-python-headless
