@@ -5,4 +5,4 @@ joblib
 deepface
 mtcnn
 opencv-python-headless
-keras
+tf-keras
