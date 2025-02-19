@@ -1,5 +1,8 @@
 # Face Recognition App (Image & Video) 🎭🚀
 
+https://facedetection-wj5mxwmdl3s4fbuqedirgm.streamlit.app/
+
+
 This is a Streamlit-based Face Recognition App that leverages DeepFace (Facenet512) for face embeddings, MTCNN for face detection, and an SVM classifier for identity recognition. The app supports both image and video-based face recognition, allowing users to upload files and see real-time predictions.
 
 **Note:** The training dataset focuses on five iconic personalities:
