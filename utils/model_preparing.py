@@ -2,7 +2,7 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score
-import joblib  # For saving the model
+import joblib  
 import numpy as np
 import os
 
@@ -25,7 +25,7 @@ print(f"y_encoded shape: {y_encoded.shape if hasattr(y_encoded, 'shape') else le
 X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2, random_state=42)
 
 # Train an SVM classifier
-svm_model = SVC(kernel="linear", probability=True)
+svm_model = SVC(kernel="linear", C=0.1, probability=True)
 svm_model.fit(X_train, y_train)
 print("Model training complete! ✅")
 
