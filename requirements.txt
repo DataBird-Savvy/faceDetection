@@ -4,3 +4,4 @@ numpy
 joblib
 deepface
 mtcnn
+opencv-python-headless

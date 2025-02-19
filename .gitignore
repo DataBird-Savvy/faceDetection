@@ -133,7 +133,7 @@ celerybeat.pid
 myenv/
 env/
 venv/
-temp_face.jpg
+
 ENV/
 env.bak/
 venv.bak/
@@ -152,6 +152,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+temp_face.jpg
 
 # Pyre type checker
 .pyre/
