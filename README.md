@@ -50,8 +50,7 @@ Due to the limited number of training images, data augmentation was applied usin
    git clone git@github.com:DataBird-Savvy/faceDetection.git
 
 
-
-    ![image](https://github.com/user-attachments/assets/0b704859-a0a0-4862-b0d6-d70a17290b15)
+![image](https://github.com/user-attachments/assets/0b704859-a0a0-4862-b0d6-d70a17290b15)
 
 
 
