@@ -94,7 +94,7 @@ def recognize_and_draw_faces(image, is_video):
 
 
 
-def process_video(video_path, frame_skip=2):
+def process_video(video_path, frame_skip=1):
     cap = cv2.VideoCapture(video_path)
     output_frames = []
     if not cap.isOpened():
