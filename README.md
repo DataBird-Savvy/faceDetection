@@ -1,52 +1,73 @@
-Face Recognition App (Image & Video) 🎭🚀
+# Face Recognition App (Image & Video) 🎭🚀
 
-This Streamlit-based Face Recognition App utilizes DeepFace (Facenet512) for face embeddings, MTCNN for face detection, and an SVM classifier for identity recognition. The app supports both image and video-based face recognition, allowing users to upload files and see real-time predictions.
-✨ Features
-
-✔ Recognizes Faces in Images & Videos
-✔ Uses DeepFace (Facenet512) for Face Embeddings
-✔ MTCNN for Face Detection
-✔ SVM Classifier for Face Recognition
-✔ Processes Videos with Frame Skipping for Efficiency
-✔ Interactive Streamlit Web Interface
-📂 How It Works
-
-1️⃣ Upload an image or video (JPG, PNG, or MP4).
-2️⃣ The app detects faces using MTCNN and extracts embeddings using DeepFace.
-3️⃣ The SVM model predicts the person’s identity.
-4️⃣ Recognized faces are displayed with bounding boxes and labels.
-5️⃣ For videos, the app processes frames and generates an output video with face annotations.
-🛠️ Tech Stack
-
-    Python 🐍
-    OpenCV 📸
-    DeepFace 🤖
-    MTCNN 🔍
-    Streamlit 🌐
-    SVM Classifier 📊
-    Joblib (for model persistence)
-
-🚀 Setup Instructions
-
-1️⃣ Clone this repository:
-
-git clone git@github.com:DataBird-Savvy/faceDetection.git
+https://facedetection-wj5mxwmdl3s4fbuqedirgm.streamlit.app/
 
 
-2️⃣ Install dependencies:
+This is a Streamlit-based Face Recognition App that leverages DeepFace (Facenet512) for face embeddings, MTCNN for face detection, and an SVM classifier for identity recognition. The app supports both image and video-based face recognition, allowing users to upload files and see real-time predictions.
 
-pip install -r requirements.txt
+**Note:** The training dataset focuses on five iconic personalities:
+- **Virat Kohli** 🏏
+- **Maria Sharapova** 🎾
+- **Lionel Messi** ⚽
+- **Serena Williams** 🎾
+- **Roger Federer** 🎾
 
-3️⃣ Run the Streamlit app:
+Due to the limited number of training images, data augmentation was applied using additional images of Lionel Messi to boost model performance.
 
-streamlit run app.py
+---
+
+## ✨ Features
+- Recognizes faces in images & videos
+- Uses DeepFace (Facenet512) for face embeddings
+- Detects faces using MTCNN
+- Classifies faces with an SVM model
+- Processes videos with frame skipping for efficiency
+- Interactive Streamlit web interface
+
+---
+
+## 📂 How It Works
+1. **Upload** an image or video (JPG, PNG, or MP4).
+2. **Detect** faces using MTCNN and extract embeddings using DeepFace.
+3. **Predict** the identity using an SVM model.
+4. **Display** recognized faces with bounding boxes and labels.
+5. **Process videos** by analyzing frames and generating an output video with annotations.
+
+---
+
+## 🛠️ Tech Stack
+- **Python** 🐍
+- **OpenCV** 📸
+- **DeepFace** 🤖
+- **MTCNN** 🔍
+- **Streamlit** 🌐
+- **SVM Classifier** 📊
+- **Joblib** (for model persistence)
+- **scikit-learn** (for data preprocessing and model training)
+
+---
+
+
+![image](https://github.com/user-attachments/assets/0b704859-a0a0-4862-b0d6-d70a17290b15)
+
+
+---
+
+## 🚀 Setup Instructions
+1. **Clone the Repository:**
+   ```bash
+   git clone git@github.com:DataBird-Savvy/faceDetection.git
+
+
+
+
+
 
 📌 Future Improvements
 
 🔹 Add support for real-time webcam face recognition
 🔹 Improve model accuracy with more training data
 🔹 Implement multiple backend models for comparison
-🔹 Deploy on Streamlit Cloud or Hugging Face Spaces
 🤝 Contribution
 
 Contributions are welcome! Feel free to fork the repo, make improvements, and submit a PR.
