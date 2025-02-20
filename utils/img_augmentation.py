@@ -26,7 +26,7 @@ if not os.path.exists(result_path):
 
 images = [img for img in os.listdir(folder_path) if img.endswith('.jpg')]
 
-# Process each image
+
 for img_name in images:
     img_path = os.path.join(folder_path, img_name)
     img = cv2.imread(img_path)

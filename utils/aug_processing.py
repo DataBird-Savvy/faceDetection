@@ -4,7 +4,7 @@ from deepface import DeepFace
 from sklearn.preprocessing import LabelEncoder
 
 
-dataset_path = "data/processed_faces"
+dataset_path = "/content/drive/MyDrive/augmented_faces"
 
 
 def get_embedding(img_path):
@@ -14,6 +14,7 @@ def get_embedding(img_path):
     except Exception as e:
         print(f"Error processing {img_path}: {e}")
         return None
+
 
 X, y = [], []
 
@@ -41,9 +42,5 @@ print(f"y shape: {y_encoded.shape}")
 os.makedirs("artifacts", exist_ok=True)
 
 
-np.savez_compressed("face_embeddings.npz", embeddings=X, labels=y_encoded)
+np.savez_compressed("augface_embeddings.npz", embeddings=X, labels=y_encoded)
 print("Embeddings saved successfully! ✅")
-
-
-
-
